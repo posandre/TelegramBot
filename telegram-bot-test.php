@@ -30,7 +30,6 @@ try {
         $chatId = $update['message']['chat']['id'];
         $authorId = $update['message']['from']['id'];
         $authorName = $update['message']['from']['first_name'] . ' ' . $update['message']['from']['last_name'];
-        $message = $update['message']['text'];
 
         $authorInfo = [
             'author_id' => $authorId,
@@ -51,6 +50,7 @@ try {
             $message = "Hello.\nHow are you {$authorName}?";
         }
 
+        $telegramBotDatabase->addUpdateToDatabase($update);
         $telegramBot->sendMessage(
             $chatId,
             $message
